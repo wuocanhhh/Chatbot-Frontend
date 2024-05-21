@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbox - Trường Đại Học Y Dược Cần Thơ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            padding: 20px;
+            text-align: center;
+        }
+        .header {
+            background-color: #4b0082;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .login-link {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #4b0082;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .logo {
+            margin: 20px 0;
+        }
+        .logo img {
+            width: 100px;
+        }
+        .chatbox {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #4b0082;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .chatbox img {
+            width: 80px;
+        }
+        .characters {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .characters img {
+            width: 100px;
+        }
+        .start-button {
+            background-color: #4b0082;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .start-button:hover {
+            background-color: #3a006d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Trường Đại Học Y Dược Cần Thơ</h1>
+        <a href="login.html" class="login-link">Đăng nhập</a>
+    </div>
+    <div class="logo">
+        <img src="img/Logo_Đại_học_Y_Dược_Cần_Thơ.gif" alt="Logo">
+    </div>
+    <div class="characters">
+        <img src="img/thắc_mắc-removebg-preview.png" alt="Student">
+        <div class="chatbox">
+            <img src="img/chatbox.png" alt="Chatbox">
+            <p>Chatbox</p>
+        </div>
+        <img src="img/bac-si-chinh-removebg-preview.png" alt="Doctor">
+    </div>
+    <p>Hệ thống giải đáp và đối thoại</p>
+    <a href="interface.html"><button  class="start-button">Bắt đầu</button></a>
+ 
+</div>
+
+</body>
+</html>

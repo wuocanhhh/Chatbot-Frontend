@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Chat Interface - Trường Đại Học Y Dược Cần Thơ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #4b0082;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            width: 90%;
+            height: 90vh;
+            display: flex;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+         .arrow-right::after {
+            content: '\2192'; /* Mã Unicode cho mũi tên phải */
+            padding-left: 10px;
+        }
+
+        .sidebar {
+            background-color: #1a1a1a;
+            color: white;
+            width: 25%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .sidebar .menu {
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar .menu button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            text-align: left;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .sidebar .menu button:hover {
+            background-color: #333;
+        }
+        .sidebar .profile {
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .profile img {
+            border-radius: 50%;
+            margin-right: 10px;
+            width: 40px;
+        }
+        .chat-area {
+            background-color: #f5f5f5;
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background-color: #000;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header .search-bar {
+            background-color: #eee;
+            padding: 5px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+           
+        }
+        .chat-header .search-bar input {
+            border: none;
+            background: transparent;
+            margin-left: 5px;
+        }
+        .chat-content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .chat-message {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 10px;
+        }
+        .chat-message.user {
+            justify-content: flex-end;
+        }
+        .chat-message .message {
+            background-color: #0084ff;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+        }
+        .chat-message.user .message {
+            background-color: #d6d6d6;
+            color: black;
+        }
+        .chat-footer {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-top: 1px solid #ddd;
+        }
+        .chat-footer input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            background-color: #f1f0f0;
+            margin-right: 10px;
+        }
+        .chat-footer button {
+            background-color: #4b0082;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-right: 3px;
+
+        }
+        .file-upload {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+}
+
+.custom-file-upload:hover {
+    background-color: #0056b3;
+}
+
+#file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Câu hỏi gợi ý  */
+
+.suggest-question {
+    background-color: transparent;
+    border-radius: 8px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    width: 400px;
+    padding: 20px;
+}
+
+.message {
+    background-color: #e9ecef;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+     border: none; /* Bỏ viền nếu có */
+ 
+}
+
+.message p {
+    margin: 0;
+    color: #333;
+}
+
+.related-questions p {
+    margin: 0 0 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+        border: none; /* Bỏ viền nếu có */
+}
+
+li {
+    margin: 10px 50px;
+    padding: 10px;
+    border-radius: 15px;
+    color: white;
+     border: none; /* Bỏ viền nếu có */
+}
+
+.red {
+    background-color: #ff6b6b;
+}
+
+.yellow {
+    background-color: #ffd93b;
+    
+}
+
+.green {
+    background-color: #4caf50;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <div>
+            <h2>Trường Đại Học Y Dược Cần Thơ</h2>
+            <div class="menu">
+
+                <a href="history.html"><button> <p class="" >Lịch sử tìm kiếm</p></button></a>
+               <button> <p class="arrow-right">Đoạn chat hiện tại</p>   </button>
+        
+            </div>
+        </div>
+        <div class="profile">
+            <img src="img/user-removebg-preview.png" alt="User">
+            <button><span>Quốc Anh</span></button>
+       
+        </div>
+    </div>
+    <div class="chat-area">
+        <div class="chat-header">
+            <h2>Đoạn chat hiện tại</h2>
+            <div class="search-bar">
+                <img src="img/Logo_Đại_học_Y_Dược_Cần_Thơ.gif" alt="Search" width="20">
+                <input type="text" placeholder="Tìm Kiếm">
+            </div>
+           <a href="login.html"><button class="logout-button">Thoát</button></a> 
+        </div>
+        <div class="chat-content">
+            <div class="chat-message user">
+                <div class="message">Cho hỏi học phí của Trường Đại Học Y Dược Cần Thơ là bao nhiêu ?</div>
+            </div>
+            <div class="chat-message">
+                <div class="message">Học phí của Trường Đại Học Y Dược hiện tại là khoảng 37.5 triệu đồng mỗi năm/sinh viên. Bạn có câu hỏi nào nữa không?</div>
+            </div>
+             <div class="chat-message user">
+                <div class="message">Cho hỏi chỉ tiêu tuyển sinh của trường năm 2025 ?</div>
+            </div>
+
+            <div class="chat-message">
+            <div class="message">Hiện tại chưa có thông tin bạn cần tìm.Vui lòng liên hệ sau!</div>
+        </div>
+        <div class="suggest-question">
+            <p>⭐Câu hỏi có liên quan bạn có thể tham khảo?</p>
+            <ul>
+
+
+                <li class="red">  <button> Tuyển sinh của năm 2023 là?</button></li>
+                 <li class="yellow">  <button>Số lượng giảng viên của trường hiện tại là?</button></li>
+                  <li class="green">  <button>Hiệu trưởng của trường hiện tại là ai?</button></li>
+     
+               
+            </ul>
+        </div>
+
+        </div>
+        <div class="chat-footer">
+<!--Nút giọng nói  -->
+    <div class="search-void">
+           
+        <button id="startButton">Start Listening</button>
+        <div>
+            <textarea id="textbox" placeholder="Your text will appear here..."></textarea>
+        </div>
+    </div>
+
+<!-- Nút gửi và bảng nhập văn bản  -->
+            <input type="text" placeholder="Nhập câu hỏi của bạn vào đây ?">
+            <button>Gửi</button>
+
+
+        <!-- <button><i style="font-size:15px ; gap:10px" class="fa">&#xf130;</i></button>    -->
+    </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>window.chatConfig = { f: false,  g: "663c79c212ee0dd4a1c50e6b", i: "663c7a1212ee0dd4a1c51059", t: "f0fb0f3718bb9a52761db9af1622328div552ab86fd72b7a0e5c127cd808f421a21908", l:" Chat Voice", c: "#7c2d2d", conver: "undefined", a: "https://dolphin.seateklab.vn" }</script> 
+ <script src="https://dolphin.seateklab.vn/embed/event.min.js" defer></script>
+    <script src="javacript/void.js"></script>
+</body>
+</html>
